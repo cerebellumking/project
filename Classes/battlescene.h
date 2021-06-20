@@ -44,6 +44,8 @@ public:
 	Sprite* guard4;
 	Sprite* guard5;
 	Sprite* tutor;
+	Sprite* treasure;
+	Sprite* reward[4];
 	virtual void onKeyPressed_safe(EventKeyboard::KeyCode keycode, Event* event);
 	void battle_scene::onKeyPressed_tutor(EventKeyboard::KeyCode keycode, Event* event);
 	/*施朱博*/
@@ -106,11 +108,6 @@ private:
 	bool HP_bottle_exist;
 	bool MP_bottle_exist;
 	//创造补给和捡起补给 马昕岳***********************************************************************************************************
-	/*怪物*/
-	enemy_melee1 enemy_1;
-	enemy_melee2 enemy_2;
-	enemy_remote1 enemy_3;
-	enemy_remote2 enemy_4;
 	/*怪物数组*/
 	enemy_melee1 melee1[5];
 	enemy_remote1 remote1[3];
