@@ -148,7 +148,7 @@ bool enemy_melee1::init()
 	set_hp(1);
 	set_speed(2.1);
 	set_attack_distance(30);
-	set_sight_distance(500);
+	set_sight_distance(700);
 	if(get_map_num()==0)
 		bind_sprite(Sprite::create("enemy\\melee1.png"));
 	else
@@ -188,7 +188,7 @@ void enemy_melee2::attack(knight* Knight)
 bool enemy_remote1::init()
 {
 	set_attack(1);
-	set_hp(4);
+	set_hp(14);
 	set_speed(2.1);
 	set_attack_distance(1400);
 	set_sight_distance(1400);
@@ -279,8 +279,8 @@ Sprite* enemy_remote2::get_bullet()
 bool boss::init()
 {
 	set_attack(2);
-	set_hp(1);
-	set_max_hp(1);
+	set_hp(100);
+	set_max_hp(100);
 	set_speed(2.1);
 	set_attack_distance(80);
 	set_sight_distance(1400);

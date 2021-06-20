@@ -46,15 +46,6 @@ void knight::set_mp(int mp)
 {
     MP = mp;
 }
-/*重复了
-void knight::set_max_hp(int hp)
-{
-    max_HP = hp;
-}
-void knight::set_max_mp(int mp)
-{
-    max_MP = mp;
-}*/
 
 int knight::get_hp()
 {
@@ -257,7 +248,6 @@ void knight::keyboard_event()
     listener->onKeyPressed = [&](EventKeyboard::KeyCode code, Event*)
     {
      
-        
           
         switch (code)
         {
@@ -289,7 +279,6 @@ void knight::keyboard_event()
             break;
          //创造补给和捡起补给 马昕岳***********************************************************************************************************
         case EventKeyboard::KeyCode::KEY_Q:
-
 
             Q_pressed_check = 1;
             break;
@@ -325,6 +314,11 @@ void knight::keyboard_event()
             
           
             knight::set_speed_y(0);
+            break;
+        case EventKeyboard::KeyCode::KEY_Q:
+
+
+            knight::set_Q_check(false);
             break;
         }
         
