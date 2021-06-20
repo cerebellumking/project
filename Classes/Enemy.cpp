@@ -145,7 +145,7 @@ int enemy::get_map_num()
 bool enemy_melee1::init()
 {
 	set_attack(1);
-	set_hp(1);
+	set_hp(7);
 	set_speed(2.1);
 	set_attack_distance(30);
 	set_sight_distance(700);
@@ -287,7 +287,7 @@ bool boss::init()
 	if (get_map_num() == 0)
 		bind_sprite(Sprite::create("enemy\\boss.png"));
 	else
-		bind_sprite(Sprite::create("enemy\\boss.png"));
+		bind_sprite(Sprite::create("enemy\\boss1.png"));
 	for (int i = 0; i < 12; i++) {
 		if (get_map_num() == 0)
 			bullet[i] = Sprite::create("enemy\\bullet_boss.png");

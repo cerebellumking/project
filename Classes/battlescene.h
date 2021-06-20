@@ -65,7 +65,7 @@ public:
 	bool if_all_enemy_dead(); //判断当前的怪是否全部消灭
 
 	void set_knight(int mp, int mp_max, int hp, int max_hp, int armor);
-
+	void set_buff(bool buff1, bool buff2, bool buff3);
 	/*创作者：马昕岳*/
 	void create_unpicked_weapon(Vec2 pos, std::string name, std::string bulllet_name);
 	void delete_picked_weapon(Vec2 pos);
@@ -88,7 +88,7 @@ public:
 	void create_buff_add_attack_speed_callback(cocos2d::Ref* pSender);
 	void create_buff_arrmor_callback(cocos2d::Ref* pSender);
 	void create_buff_recover_mp_callback(cocos2d::Ref* pSender);
-
+	bool check_if_space = false;
 	void create_supply(Vec2 pos);
 	void pick_up_supply();
 	//buff系统 马昕岳*********************************************************************************************************************

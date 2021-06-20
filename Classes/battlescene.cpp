@@ -12,7 +12,7 @@ float volume2_ = 0.2;
 float volume3_ = 0.5;
 int id_2_;
 int id_3_;
-
+int count_get_buff = 0;
 int mp = 50;
 int hp = 3;
 int mhp = 5;
@@ -21,7 +21,9 @@ int armor = 5;
 int count_box_apperance = 0;
 std::string bullet_name, weapon_name;
 int damage, mp_cost;
-bool buff1, buff2, buff3;
+bool buff1 = false;
+bool buff2 = false;
+bool buff3=false;
 Scene* battle_scene::createWithPhysics()
 {
 	return battle_scene::create();
@@ -420,21 +422,21 @@ bool battle_scene::init()
 			reward[i]->setPosition(reward2_x, reward2_y);
 		if (i == 2)
 			reward[i]->setPosition(reward3_x, reward3_y);
-		map->addChild(reward[i], 10);
+		map->getChildByTag(100)->addChild(reward[i], 10);
 		reward[i]->setVisible(false);
 	}
 	if (round_ == 1 && map_num == 0) {
 		reward[3] = Sprite::create("box.png");
 		reward[3]->setPosition(reward4_x, reward4_y);
 		reward[3]->setVisible(false);
-		map->addChild(reward[3], 10);
+		map->getChildByTag(100)->addChild(reward[3], 10);
 	}
 	auto PointDic5 = objGroup->getObject("treasure");
 	float reward5_x = PointDic5["x"].asFloat();
 	float reward5_y = PointDic5["y"].asFloat();
 	treasure= Sprite::create("box.png");
 	treasure->setPosition(reward5_x, reward5_y);
-	map->addChild(treasure, 10);
+	map->getChildByTag(100)->addChild(treasure, 10);
 
 
 
@@ -442,7 +444,7 @@ bool battle_scene::init()
 	Knight = knight::create("knight.png");
 	Knight->setPosition(Vec2(born_x, born_y));
 	Knight->init();
-	create_unpicked_weapon(Vec2(born_x, born_y), "M2.png", "M2 bullet.png");
+	//create_unpicked_weapon(Vec2(born_x, born_y), "M2.png", "M2 bullet.png");
 	//create_unpicked_weapon(Vec2(born_x-100, born_y+100), "big_knife.png", "knife_bullet.png");
 	layer->addChild(Knight, 0);
 	Knight->weapon_init();
@@ -450,11 +452,17 @@ bool battle_scene::init()
 		set_knight(mp, mmp, hp, mhp, armor);
 		Knight->removeChild(Knight->Weapon,1);
 		Knight->weapon_init(weapon_name, bullet_name, damage, mp_cost);
+		set_buff(buff1, buff2, buff3);
+		if (weapon_name == "M2.png");
+			Knight->Weapon->set_bullet_cost(1);
+		if (weapon_name == "big_knife.png")
+			Knight->Weapon->set_bullet_cost(10);
 	}
 	MP_bottle = Sprite::create("MP_bottle.png");
 	HP_bottle_exist = false;
 	HP_bottle = Sprite::create("HP_bottle.png");
 	MP_bottle_exist = false;
+	//create_supply(Vec2(born_x, born_y));
 	//血条，护甲，蓝条的刷新   马昕岳******************************************************************************************************************************
 	UIBase = Sprite::create("PlayerBaseUI.png");
 	UIBase->setPosition(Vec2(UIBase->getContentSize().width / 2, Director::getInstance()->getVisibleSize().height - UIBase->getContentSize().height / 2));
@@ -900,10 +908,17 @@ void battle_scene::update_if_battle(float dt)
 		map->getChildByTag(100)->getChildByTag(27)->setVisible(false);
 
 	}
-	if (room_type == 1 && if_all_enemy_dead()&&round_==1 ) {
+	if (room_type == 1 && if_all_enemy_dead() && round_ == 1&&map_num==1) {
 		door->setVisible(true);
 		_bool = false;
-		reward[3]->setVisible(true);
+	}
+	if (room_type == 1 && if_all_enemy_dead()&&round_==1&&map_num==0 ) {
+		door->setVisible(true);
+		_bool = false;
+		if (count_box_apperance == 0) {
+			reward[3]->setVisible(true);
+			count_box_apperance++;
+		}
 	}
 	else if(room_type==1&&round_==0)
 		door->setVisible(true);
@@ -932,6 +947,7 @@ void battle_scene::onKeyPressed_safe(EventKeyboard::KeyCode keycode, Event* even
 		if (door->isVisible()) {
 			if (keycode == EventKeyboard::KeyCode::KEY_F)
 			{
+				count_get_buff = 0;
 				unscheduleAllCallbacks();
 				hp = Knight->get_hp();
 				mhp = Knight->get_max_hp();
@@ -984,9 +1000,12 @@ void battle_scene::onKeyPressed_safe(EventKeyboard::KeyCode keycode, Event* even
 		if (sqrt(dx_ * dx_ + dy_ * dy_) < 120) {
 			if (reward[i]->isVisible()) {
 				if (keycode == EventKeyboard::KeyCode::KEY_SPACE) {
-					reward[i]->setVisible(false);
-					create_supply(reward[i]->getPosition());
-					
+					check_if_space = true;
+					if (check_if_space) {
+						reward[i]->setVisible(false);
+						create_supply(reward[i]->getPosition());
+						check_if_space = false;
+					}
 				}
 			}
 		}
@@ -1014,27 +1033,54 @@ void battle_scene::onKeyPressed_safe(EventKeyboard::KeyCode keycode, Event* even
 	}
 
 
-
-
-}
-/*导师系统*/
-void battle_scene::onKeyPressed_tutor(EventKeyboard::KeyCode keycode, Event* event)
-{
+	/*导师系统*/
 	float sight_tutor = 80;
 	float dx_tutor = static_cast<float>((Knight->getPosition().x - tutor->getPositionX()));
 	float dy_tutor = static_cast<float>((Knight->getPosition().y - tutor->getPositionY()));
 
 	if (sqrt(dx_tutor * dx_tutor + dy_tutor * dy_tutor) < sight_tutor) {
-		if (keycode == EventKeyboard::KeyCode::KEY_E)
+		if (keycode == EventKeyboard::KeyCode::KEY_E&&count_get_buff==0)
 		{
-			//createbuff
-
+			count_get_buff++;
+			int judge;
+			Sprite* buff;
+			srand(time(NULL));
+			judge = rand() %5+1;
+			switch (judge)
+			{
+				case 1:
+					Knight->set_max_hp(Knight->get_max_hp() + 1);
+					Knight->set_hp(Knight->get_max_hp() + 1);
+					buff = Sprite::create("add_max_hp_buff.png");
+					break;
+				case 2:
+					Knight->set_max_mp(Knight->get_max_mp() + 40);
+					Knight->set_mp(Knight->get_max_mp() + 40);
+					buff = Sprite::create("increase_max_mp_buff.jpg");
+					break;
+				case 3:
+					Knight->set_if_get_add_attack_speed_buff(1);
+					buff1 = true;
+					buff = Sprite::create("add_attack_speed_buff.png");
+					break;
+				case 4:
+					Knight->set_if_get_arrmor_buff(1);
+					buff = Sprite::create("armor_buff.jpg");
+					buff2 = true;
+					break;
+				case 5:
+					Knight->set_if_get_recover_mp_buff(1);
+					buff3 = true;
+					buff = Sprite::create("recover_mp_buff.jpg");
+					break;
+				default:
+					break;
+			}
+			buff->setPosition(tutor->getPosition() + Vec2(0, -160));
+			map->addChild(buff, 200);
 		}
 	}
 }
-
-
-
 
 
 
@@ -1585,8 +1631,24 @@ void battle_scene::update_bullet_to_enemy(float dt)
 				melee1[i].deduct_hp(Knight->Weapon->get_bullet_demage());
 				Knight->Weapon->set_demage(0);
 			}
+			if (melee1[i].get_distance(Knight) <= 100) {
+				melee1[i].deduct_hp(4);
+				Knight->Weapon->set_demage(0);
+			}
+
 		}
 		else if(mark_melee[i]==0){
+			if (Knight->get_if_get_recover_mp_buff())
+			{
+				if (Knight->get_mp() + 2 < Knight->get_max_mp())
+				{
+					Knight->set_mp(Knight->get_mp() + 2);
+				}
+				else
+				{
+					Knight->set_mp(Knight->get_max_mp());
+				}
+			}
 			melee1[i].get_sprite()->setVisible(false);
 			mark_melee[i]++;
 		}
@@ -1596,6 +1658,10 @@ void battle_scene::update_bullet_to_enemy(float dt)
 			if (remote1[i].if_collide(Knight->Weapon->get_bullet(), remote1[i].get_sprite())) {
 				Knight->Weapon->get_bullet()->setVisible(false);
 				remote1[i].deduct_hp(Knight->Weapon->get_bullet_demage());
+				Knight->Weapon->set_demage(0);
+			}
+			if (remote1[i].get_distance(Knight) <= 100) {
+				remote1[i].deduct_hp(4);
 				Knight->Weapon->set_demage(0);
 			}
 		}
@@ -1622,8 +1688,23 @@ void battle_scene::update_bullet_to_enemy(float dt)
 				enemy_boss.deduct_hp(Knight->Weapon->get_bullet_demage());
 				Knight->Weapon->set_demage(0);
 			}
+			if (enemy_boss.get_distance(Knight) <= 100) {
+				enemy_boss.deduct_hp(4);
+				Knight->Weapon->set_demage(0);
+			}
 		}
 		else if(mark_boss==0){
+			if (Knight->get_if_get_recover_mp_buff())
+			{
+				if (Knight->get_mp() + 2 < Knight->get_max_mp())
+				{
+					Knight->set_mp(Knight->get_mp() + 2);
+				}
+				else
+				{
+					Knight->set_mp(Knight->get_max_mp());
+				}
+			}
 			enemy_boss.get_sprite()->setVisible(false);
 			mark_boss++;
 		}
@@ -1645,7 +1726,7 @@ void battle_scene::fire_bullet()
 	std::string a = "big_knife.png";
 	if (Knight->Weapon->get_weapon_name().c_str() == a)
 	{
-		auto rotate = RotateBy::create(0.5, 360);
+		auto rotate = RotateBy::create(0.2, 360);
 		Knight->Weapon->runAction(rotate);
 		//抡人的函数
 	}
@@ -1656,8 +1737,9 @@ void battle_scene::fire_bullet()
 		/*施朱博对于骑士子弹与怪碰撞的修改
 		* 进入战斗状态后再检测子弹是否与怪碰撞
 		*/
-		if (_bool)
+		if (_bool) {
 			schedule(CC_SCHEDULE_SELECTOR(battle_scene::update_bullet_to_enemy), 1 / 60);
+		}
 		else
 			unschedule(CC_SCHEDULE_SELECTOR(battle_scene::update_bullet_to_enemy));
 		if (Knight->isFlippedX())
@@ -1791,21 +1873,29 @@ void battle_scene::schedule_MP(float delta)
 //创造补给和捡起补给 马昕岳***********************************************************************************************************
 void battle_scene::create_supply(Vec2 pos)
 {
-	int judge;
 	srand(time(NULL));
+	int judge;
 	judge = rand() % 2;
 	if (judge == 1)
 	{
-		HP_bottle->setPosition(pos);
-		//map->addChild(HP_bottle, 200);
-		map->getChildByTag(100)->addChild(HP_bottle, 100);
+		if(HP_bottle_exist)
+		HP_bottle->removeFromParent();
+		HP_bottle = Sprite::create("HP_bottle.png");
+		map->addChild(HP_bottle, 200);
+		HP_bottle->setPosition(pos + Vec2(0, -100));
+		//map->getChildByTag(100)->addChild(HP_bottle, 100);
+		//this->addChild(HP_bottle,1000);
 		HP_bottle_exist = 1;
 	}
 	else
 	{
-		MP_bottle->setPosition(pos);
-		//map->addChild(MP_bottle, 200);
-		map->getChildByTag(100)->addChild(MP_bottle, 100);
+		if (MP_bottle_exist)
+		MP_bottle->removeFromParent();
+		MP_bottle = Sprite::create("MP_bottle.png");
+		map->addChild(MP_bottle, 200);
+		MP_bottle->setPosition(pos + Vec2(0, -100));
+		//map->getChildByTag(100)->addChild(MP_bottle, 100);
+		//this->addChild(MP_bottle, 1000);
 		MP_bottle_exist = 1;
 	}
 }
@@ -1819,15 +1909,15 @@ void battle_scene::pick_up_supply()
 			if (Knight->get_hp() + 2 > Knight->get_max_hp())
 			{
 				Knight->set_hp(Knight->get_max_hp());
-				//map->removeChild(HP_bottle);
-				map->getChildByTag(100)->removeChild(HP_bottle);
-
+				map->removeChild(HP_bottle);
+				//this->removeChild(HP_bottle);
 			}
 			else
 			{
 				Knight->set_hp(Knight->get_hp() + 2);
 				//map->removeChild(HP_bottle);
-				map->getChildByTag(100)->removeChild(HP_bottle);
+				map->removeChild(HP_bottle);
+				//this->removeChild(HP_bottle);
 			}
 			HP_bottle_exist = false;
 		}
@@ -1837,17 +1927,19 @@ void battle_scene::pick_up_supply()
 			{
 				Knight->set_mp(Knight->get_max_mp());
 				//map->removeChild(MP_bottle);
-				map->getChildByTag(100)->removeChild(MP_bottle);
+				map->removeChild(MP_bottle);
+				//this->removeChild(HP_bottle);
 			}
 			else
 			{
 				Knight->set_mp(Knight->get_mp() + 80);
 				//map->removeChild(MP_bottle);
-				map->getChildByTag(100)->removeChild(MP_bottle);
+				map->removeChild(MP_bottle);
+				//this->removeChild(HP_bottle);
 			}
 			MP_bottle_exist = false;
 		}
-		//Knight->set_Q_check(false);
+		Knight->set_Q_check(false);
 	}
 }
 //创造补给和捡起补给 马昕岳***********************************************************************************************************
@@ -1991,6 +2083,12 @@ void battle_scene::create_buff_recover_mp(Vec2 pos)
 	auto menu = Menu::create(buff_image, NULL);
 	menu->setPosition(Vec2::ZERO);
 	this->addChild(menu, 1);
+}
+void battle_scene::set_buff(bool buff1, bool buff2, bool buff3)
+{
+	Knight->set_if_get_add_attack_speed_buff(buff1);
+	Knight->set_if_get_arrmor_buff(buff2);
+	Knight->set_if_get_recover_mp_buff(buff3);
 }
 void battle_scene::create_buff_recover_mp_callback(cocos2d::Ref* pSender)
 {
