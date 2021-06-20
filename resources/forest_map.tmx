@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="56" tileheight="56" infinite="0" nextlayerid="9" nextobjectid="98">
+ <tileset firstgid="1" name="map1" tilewidth="56" tileheight="56" tilecount="49" columns="7">
+  <image source="map1.png" width="392" height="392"/>
+ </tileset>
+ <tileset firstgid="50" source="wall2.tsx"/>
+ <tileset firstgid="51" name="wall3" tilewidth="56" tileheight="84" tilecount="1" columns="1">
+  <image source="wall3.png" width="56" height="84"/>
+ </tileset>
+ <tileset firstgid="52" name="orange" tilewidth="56" tileheight="56" tilecount="1" columns="1">
+  <image source="orange.png" width="56" height="56"/>
+  <tile id="0">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer id="2" name="floor" width="100" height="100">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACu2bfY7jIAzFuUHz7/YS3P92u9UsGsu1+QhgDHk/KdI0zRTqZx6EuCEAAAAAAAAAAAAAAADA+fwZcHhqZ3c+3/NFjve/4/p/pNf0Pf66RQ+LdnaHx4nG5grfcaHx6tFjVju7w+PEYyPFb8T4mNXO7tA4JQ+RYnSx93rGx8x2dkfyEerp6bjCd8yu0OdXM9rZnc/3pD6u+YfmLS16WLRzApKHpLyUvJy+jsI56dp03d12nqgHjcElnHsL52KQteDzQFT+v7adp+khxVPKZ37fEEPdPBCD7FO17TxFj8/35LnMPV7z+9b5w6Kd3Ulxov4gxUiba1v1mN3O7vA4Sfl7sWvodXf1mNXO7qR1KPdraV6WYtm63p3dzu5o+0qlPE6e0rt/Nbqd3SnFSVp70mtG6TGqnd3JPW+I5MDzj/XQPAXroX4B1oPx4Qu6xgHrofdmYD3Qwxf0Hg2sh94rg/VAD19AD1/QvT6wHowPe6z2E0EdqHP2Beqcf/HwTAB1zr948ArLOmcP+Vfq32qvsKxz9pB/Lf1b4RWWdc4e8q+2f7O9otQHbQxIeTBKD29zlaVXlPrAx8CMOmcP+Vfqn5VX5Ppg5eke8q+ElVdojPD0lmN1/pXo8YqY6bumJT8f2etWT2/pQyTnvf4mR/NPaexyL+GxLPmvdD4Kn9/ymS19iOx/W/PPYv7o+U1EJO/X+K90Xopny2e29CGnXU3+WelB80DSQvNUL/cfLUdP/lnrodV402vodTvef6zOv1L/NG/nHixptuP9x+r8K/VP84Zcf1M8Zq13Z3m6h/wr9S+nh5SP9JpRelh5uof8K/VPO2KweVZq6eke8u8utB8zsfR0788/ctCYzMS7p3uB5uRMvHu6F6g/zGRnT7fEUo/Va4odoD6xCqs5bAeoX6/sg8UY3QEvemB8/OBBD6s13g7Q9eYqrNYUO+BlfECPH7yMj9Pnj9p9mtq1/8z7AA9jdDb8fpjvG0nPf17sPek89LiHtj9BnwFp8X9nzkOPe3A9pGfUXA9JH37+rh5P3y+hekj7p9I+N9/rls736NHjnyfpQWOf2+cu1VBdYZwerf55gh7Sc1FpL7vGw9IxSo9W/zxBD8mrauudRvtGr3+epAeNaW2902jf6PXPU/SQYiB9d20OH7m+6vHPE/ToqXfSfCOG9nXzK+zxG4CZ9NY7ab4RhWtz+qW/o9LejHpRj/TWO2ljIIZvLUvr5pKONf55gh7avR3PZ02zkb7R658n6KHNl7nxMss3LOtFPdJb7zTaNyzrRT3S6w+jfePp9aK9/jDaN55eL9rrD6N94+n1oiPWVyN9o7Xe/+TnH3fXVyf6xip6/eFU31jFCH840TcAAOCJ/AU7hQhhQJwAAA==
+  </data>
+ </layer>
+ <layer id="5" name="meta" width="100" height="100" opacity="0.03">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACu3ZUWrDMBAG4Rwq9z9bn0rAFOpYq9357fkgj5XXmhIL5/WSJEmSJEmSpPt7F3xI10m3ep/f9Oi4Tjp7sNiDxR4s9mCp2KeO85E9WFLmXJVynylzrkq5z5Q5V/n8YPF8xWIPFnuw2IPFHixnz0P+/jHrrx6aYw8We7DYg8UeLPZgsQeLPVjswWIPFnuw2GNG1/tEneN7cBZ7fBB+E7DHB2EvOmcg/P/9N9/k33fPQLjfnevboxZhPnvUrW+PWoT57FG3fsV5pXuG1WvtdKezewd7sNiDhd7D50ctwnyer+rWt0ctwnz2qFvfHrXOPvd2PR9/1+76e3qPs9fdOUd3j8mz4FV37ZHKHiz2YOnuMX2moOvsQZ6BgrAXhBkoCHtBmIGCsBeEGSgIe0GYgYKwF4QZKAh7QZihw5X3NBPvdp7UI2Fde7DWtcfMuk9/X0LsMXFdCnuw2IPFHiz2YNnZ4+pn9brJ0uc/Sr+f9PmP0u8nff6j9Pvx+cHi+YrFHiz2YLEHiz1YiD1WP8loPZ7OHiwV3w93/N6QpCf6Ab9h/3tAnAAA
+  </data>
+ </layer>
+ <objectgroup id="6" name="items">
+  <object id="1" name="door" x="1160" y="4657.33" width="136" height="181.333"/>
+  <object id="2" name="born" x="4561.33" y="1176">
+   <point/>
+  </object>
+  <object id="16" name="guard3" x="4276.92" y="3046.58">
+   <point/>
+  </object>
+  <object id="18" name="enemy31" x="4619" y="2835">
+   <point/>
+  </object>
+  <object id="21" name="3v1" x="4173" y="3081">
+   <point/>
+  </object>
+  <object id="22" name="enemy32" x="4753.33" y="2915.33">
+   <point/>
+  </object>
+  <object id="23" name="enemy33" x="4817.33" y="3294.67">
+   <point/>
+  </object>
+  <object id="24" name="enemy34" x="4838" y="3014">
+   <point/>
+  </object>
+  <object id="27" name="guard2" x="3109" y="2498">
+   <point/>
+  </object>
+  <object id="29" name="guard4" x="1260.33" y="4284.33">
+   <point/>
+  </object>
+  <object id="30" name="guard5" x="1769.5" y="4792">
+   <point/>
+  </object>
+  <object id="31" name="treasure" x="1258.67" y="3002.67">
+   <point/>
+  </object>
+  <object id="32" name="tutor" x="3108" y="4792">
+   <point/>
+  </object>
+  <object id="33" name="guard1" x="3455.83" y="1206.75">
+   <point/>
+  </object>
+  <object id="36" name="1v1" x="3556.67" y="1230.67">
+   <point/>
+  </object>
+  <object id="37" name="1p1" x="3050" y="1625">
+   <point/>
+  </object>
+  <object id="38" name="2p1" x="3050" y="2353">
+   <point/>
+  </object>
+  <object id="39" name="2p2" x="3051.67" y="3697.67">
+   <point/>
+  </object>
+  <object id="40" name="2v1" x="2659.33" y="3080.67">
+   <point/>
+  </object>
+  <object id="41" name="2v2" x="3556" y="3080.5">
+   <point/>
+  </object>
+  <object id="48" name="4p1" x="1203" y="4146">
+   <point/>
+  </object>
+  <object id="49" name="4v1" x="1874.5" y="4816.5">
+   <point/>
+  </object>
+  <object id="50" name="enemy16" x="2877.33" y="890.667">
+   <point/>
+  </object>
+  <object id="51" name="enemy15" x="2802.67" y="1113.33">
+   <point/>
+  </object>
+  <object id="52" name="enemy14" x="2884" y="1353.33">
+   <point/>
+  </object>
+  <object id="53" name="enemy13" x="3068" y="961.333">
+   <point/>
+  </object>
+  <object id="54" name="enemy12" x="3277.33" y="1413.33">
+   <point/>
+  </object>
+  <object id="55" name="enemy11" x="3372" y="878.667">
+   <point/>
+  </object>
+  <object id="57" name="enemy27" x="2769.33" y="2778.67">
+   <point/>
+  </object>
+  <object id="58" name="enemy26" x="2862" y="3500">
+   <point/>
+  </object>
+  <object id="59" name="enemy25" x="3397.33" y="3355.33">
+   <point/>
+  </object>
+  <object id="60" name="enemy24" x="3168.67" y="2802.67">
+   <point/>
+  </object>
+  <object id="61" name="enemy23" x="3039.33" y="3295.33">
+   <point/>
+  </object>
+  <object id="65" name="enemy22" x="2771.33" y="3276">
+   <point/>
+  </object>
+  <object id="66" name="enemy21" x="3170" y="3113.33">
+   <point/>
+  </object>
+  <object id="67" name="enemy28" x="3339.33" y="2656.67">
+   <point/>
+  </object>
+  <object id="68" name="enemy36" x="4460" y="3254">
+   <point/>
+  </object>
+  <object id="69" name="enemy35" x="4552" y="3018">
+   <point/>
+  </object>
+  <object id="70" name="boss" x="1231" y="4587">
+   <point/>
+  </object>
+  <object id="86" name="wall1v1" x="3532" y="704" width="52" height="3044"/>
+  <object id="87" name="wall1v2" x="2636" y="704" width="52" height="3032"/>
+  <object id="88" name="wall1p1" x="2698" y="738" width="824" height="40"/>
+  <object id="90" name="wall1p2" x="2698.67" y="1624" width="824" height="53.3333"/>
+  <object id="91" name="wall2p1" x="2702" y="2358" width="816" height="48"/>
+  <object id="92" name="wall2p2" x="2698" y="3690" width="826" height="54"/>
+  <object id="93" name="wall3p1" x="4148" y="2574.67" width="938.667" height="48"/>
+  <object id="94" name="wall3p2" x="4146" y="3472" width="942" height="52"/>
+  <object id="96" name="wall3v1" x="4153.33" y="2632" width="42.6667" height="824"/>
+  <object id="97" name="wall3v2" x="5045.33" y="2636" width="44" height="824"/>
+ </objectgroup>
+ <layer id="3" name="wall2" width="100" height="100">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACu3bTQ6DIBAGUM/k/Q/XVWPTAEL9q5/vrVxgMFGHAYZpAgAAAADINxeu5442/9oPAEAK+RAAIz7n2ubbAACLkfyntn/xaz+l3GxrPwAAAADA/kb2VFtrfkA2ZyK4ku8PALiTWs3Md5uzn0GOBBn8y1nW6ilb73uvWsyt68MAkOKssxdQ4kwOQIZSjLavDQAAGXrqWI+8H+CORmOfuAgAPElvriRHAuBtrd6gNrYYSwAAjuEMANDSM0cTGwByvQCrc9dnQJwAAA==
+  </data>
+ </layer>
+ <layer id="4" name="wall3" width="100" height="100">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACu2a0W7DIAwA80/9/3/by6atCAIrhpyTO2lamwZjuKoxJMchIiIiIiIiIiIi8gxe339H8b88Xvvs5xipn8zMjnO0/a5+sqMPFvpgoQ8W+mARMU+teiiyPtIHiyx5zpJlnFnynCXLOLPkOUvEOF/F69Z6O6qPO2N9xUIfLPTBQh8s9MFi9H5DrW46KufN9FM7/t9+7krNh1yHPljog4U+WOiDhT5Y6IOFPljog4U+WOiDhT6uo7XXV55Tfq6jeNwHZ6GPd1p7/a1nNKJ/L/TxC2Eududw9fevl9uV7XfnQBjvyvj6iIWQnz7i4usjFkJ++oiLP/LMTKt2iapZejm0zvm0r5XcqXbfgT5Y6INFBh+960LvWhLBSH+E2mN1fMIYra/i2u/OgTDelfH1EQshP328xx/ZV25dh/Wxh5qPXX2tbD/y/TurA/Wxvn0G9MFCHyx2+xhdS69ad9PZ6YOcAwXCXBByoECYC0IOFAhzQciBAmEuCDlQIMwFIQcKhLkg5LCDcv+mduxsP/Gs/Yo8W+/vwqpxRcfVByuuPq6LO7K3PXqvJhs0H0/fT9QHC32w0AcLfbBY7aO3zuytPT/tNyvZ8y/JPp7s+ZdkH0/2/Euyj2fHswl/X6/eg9RHbFyv56y4+mDF1Qcrrj5YcfXBijtyX6NVq830S4Hm4+nog8XZvl7tN+I4OfdO901FRJ7IFySh9PtAnAAA
+  </data>
+ </layer>
+</map>
