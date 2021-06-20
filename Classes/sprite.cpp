@@ -37,9 +37,19 @@ int sprite_living::get_attack()
 	return attack;
 }
 
+int sprite_living::get_max_hp()
+{
+	return max_hp;
+}
+
 void sprite_living::set_hp(int hp)
 {
 	this->hp = hp;
+}
+
+void sprite_living::set_max_hp(int max_hp)
+{
+	this->max_hp = max_hp;
 }
 
 void sprite_living::set_speed(float speed)

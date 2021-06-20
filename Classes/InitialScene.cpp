@@ -1,5 +1,4 @@
 #include"InitialScene.h"
-#include"enemy.h"
 #include"safeScene.h"
 #include<iostream>
 

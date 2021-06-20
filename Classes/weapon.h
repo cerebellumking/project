@@ -7,7 +7,6 @@ USING_NS_CC;
 class weapon : public Sprite
 {
 
-
 public:
 	static	weapon* weapon::create(const char* picFileName);
 

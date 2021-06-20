@@ -1,6 +1,7 @@
 #include"weapon.h"
 USING_NS_CC;
 
+
 void weapon::set_bullet_name(std::string name)
 {
 	bullet_name = name;

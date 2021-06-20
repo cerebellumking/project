@@ -15,14 +15,15 @@ class enemy:public sprite_living
 {
 	
 private:
+	int map_num;
 	float sight_distance;                                     //怪物视野
 	float attack_distance;                                    //怪物攻击范围
 	Vec2 enemy_pos;                                           //怪物坐标（用于巡逻边界的判定，并非实时更新）
 	Vec2 knight_pos;                                          //attack动作发生瞬间骑士坐标，每一次攻击时重新获取
 public:
-	//enemy() = default;
+	enemy() = default;
 
-	//~enemy();
+	virtual ~enemy()=default;
     //virtual bool init();
 	CREATE_FUNC(enemy);
 	void set_sight_distance(float sight_distance);              //设置视野
@@ -37,9 +38,11 @@ public:
 	Vec2 get_enemy_pos();                                       //获取怪物坐标
 	void set_enemy_pos();                                       //设置怪物坐标
 	virtual void move(knight* Knight);                          //移动方式,传入骑士对象
-	virtual void wander();                                      //未发现敌人时徘徊 
+	virtual void wander(int seed);                                      //未发现敌人时徘徊 
 	bool if_collide(knight* Knight,Sprite* bullet);             //检查子弹是否与骑士碰撞，怪物的子弹和骑士
 	bool if_collide(Sprite* enemy_, Sprite* bullet);            //检查子弹是否与骑士碰撞，骑士的子弹和怪
+	void set_map_num(int map_num);
+	int get_map_num();
 	//
 
 };
@@ -50,6 +53,7 @@ public:
 	//virtual void death_animation()override;
 	CREATE_FUNC(enemy_melee1);
 	virtual bool init();
+	virtual void attack(knight* Knight);
 private:
 };
 
@@ -58,6 +62,7 @@ class enemy_melee2 :public enemy{
 public:
 	virtual bool init();
 	CREATE_FUNC(enemy_melee2);
+	virtual void attack(knight* Knight);
 	//virtual void death_animation()override;
 private:
 	
@@ -89,8 +94,13 @@ private:
 class boss :public enemy{
 public:
 	//virtual void death_animation()override;
+	CREATE_FUNC(boss);
+	virtual bool init();
+	//Sprite* get_bullet();
+	Sprite* bullet[12];
+	virtual void attack(knight* Knight);
 private:
-	
+	MoveBy* move_[12];
 };
 
 #endif;

@@ -6,15 +6,12 @@
 
 #include"cocos2d.h"
 USING_NS_CC;
-//#include"Actor.h"
-//#include"Map.h"
-//#include"obstruction.h"
 
 class sprite_living :public cocos2d::Sprite//活物基类
 {
 
 public:
-	
+	virtual ~sprite_living()=default;
 	//virtual bool init();
 	CREATE_FUNC(sprite_living);
 	void bind_sprite(Sprite* sprite);                           //绑定精灵,初始化精灵的接口
@@ -23,7 +20,9 @@ public:
 	int get_hp();                                               //获取精灵的血量的接口
 	int get_speed();                                            //获取精灵的速度的接口
 	int get_attack();                                           //获取精灵的攻击力的接口
+	int get_max_hp();                                           //获取精灵最大血量的接口
 	void set_hp(int hp);                                        //设置血量
+	void set_max_hp(int max_hp);                                //设置最大血量
 	void set_speed(float speed);                                //设置速度
 	void set_attack(int attack);                                //设置攻击力
 	bool if_dead();                                             //是否死亡
@@ -39,6 +38,7 @@ public:
 
 private:
 	int hp;                                                      //当前生命值
+	int max_hp;                                                  //最大生命值
 	float speed;                                                 //移速
 	int attack;                                                  //攻击力
 	Sprite* sprite;                                              //精灵
